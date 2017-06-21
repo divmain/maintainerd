@@ -1,0 +1,19 @@
+{
+  "name": "maintainerd",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "micro index"
+  },
+  "author": "Dale Bustad <dale@divmain.com>",
+  "license": "MIT",
+  "dependencies": {
+    "fs-router": "^0.2.0",
+    "js-yaml": "^3.8.4",
+    "jsonwebtoken": "^7.4.0",
+    "micro": "^7.3.2",
+    "node-fetch": "^1.6.3",
+    "qs": "^6.4.0"
+  }
+}
