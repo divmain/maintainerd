@@ -38,4 +38,11 @@ module.exports.GitHub = class GitHub {
 
     return fetch(`https://api.github.com${urlSegment}`, opts);
   }
+
+  getConfig (repoPath) {
+    return this.get(`/repos/${repoPath}/contents/.maintainerd`)
+      .then(response => response.json())
+      .then(json => Buffer.from(json.content, "base64").toString())
+      .then(yamlString => load(yamlString, "utf8"));
+  }
 }
