@@ -1,0 +1,30 @@
+log: true
+pullRequest:
+  preamble: >
+    The maintainers of this repo require that all pull request submitters agree and adhere
+    to the following:
+  items:
+    - prompt: >
+        I have read the [Contributor License Agreement](http://google.com), and indicate
+        my agreement by checking this box.
+      default: false
+      required: true
+    - prompt: All related documentation has been updated to reflect the changes made.
+      default: false
+      required: true
+    - prompt: My commit messages are cleaned up and ready to merge.
+      default: false
+      required: true
+  semver:
+    enabled: true
+    autodetect: true
+commit:
+  subject:
+    mustHaveLengthBetween: [8, 100]
+    mustMatch:
+      - !!js/regexp /.*/
+    mustNotMatch:
+      - !!js/regexp /^fixup!/
+  message:
+    maxLines: 20
+    minLines: 1
