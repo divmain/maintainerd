@@ -45,4 +45,22 @@ module.exports.GitHub = class GitHub {
       .then(json => Buffer.from(json.content, "base64").toString())
       .then(yamlString => load(yamlString, "utf8"));
   }
+
+  updateCommit (repoPath, sha, failureMessage) {
+    const state = failureMessage ? "pending" : "success";
+    const description = failureMessage ? failureMessage : "maintainerd thanks you!";
+
+    const [ org, repo ] = repoPath.split("/");
+    const queryString = qs.stringify({
+      org,
+      repo,
+      sha
+    });
+
+    return this.post(`/repos/${repoPath}/statuses/${sha}?${queryString}`, JSON.stringify({
+      state,
+      description: description || "",
+      context: "divmain/maintainerd"
+    }));
+  }
 }
