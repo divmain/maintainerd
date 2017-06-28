@@ -1,25 +1,20 @@
-// const opened = require("./opened");
-// const edited = require("./edited");
-// const synchronize = require("./synchronize");
-
-
 const actionableEvents = {
-  // edited,
-  // synchronize,
-  // opened
+  // edited: require("./edited"),
+  // synchronize: require("./synchronize"),
+  reopened: require("./opened"),
+  opened: require("./opened")
 };
 
-exports.updateStatus = async opts => {
-  // const {
-  //   action,
-  //   installationId,
-  //   repoPath,
-  //   sha
-  // } = opts;
+module.exports = async (data, config, gh) => {
+  const {
+    action,
+    installationId,
+    repoPath,
+    sha
+  } = data;
 
   const actionHandler = actionableEvents[action];
-
   return actionHandler ?
-    await actionHandler(opts) :
+    await actionHandler(data, config, gh) :
     null;
 };

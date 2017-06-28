@@ -27,5 +27,7 @@ module.exports.POST = async (req, res) => {
     return send(res, 403, "Not Authorized");
   }
 
-  return handler(req, res);
+  const payload = await json(req);
+  const handlerDidRespond = await handler(payload, req, res);
+  if (!handlerDidRespond) { return send(res, 200); }
 };

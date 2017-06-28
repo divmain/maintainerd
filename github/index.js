@@ -18,6 +18,10 @@ exports.GitHub = class GitHub {
     return this.fetch("POST", urlSegment, body);
   }
 
+  patch (urlSegment, body) {
+    return this.fetch("PATCH", urlSegment, body);
+  }
+
   async fetch (method, urlSegment, body) {    
     const installationToken = await getInstallationToken(this.installationId);
 
@@ -31,7 +35,7 @@ exports.GitHub = class GitHub {
       headers
     };
 
-    if (method === "POST") {
+    if (method === "POST" || method === "PATCH" || method === "PUT") {
       headers["Content-Type"] = "application/json";
       opts.body = body;
     }
@@ -62,5 +66,10 @@ exports.GitHub = class GitHub {
       description: description || "",
       context: "divmain/maintainerd"
     }));
+  }
+
+  updatePullRequest (pullRequestData, patchJson) {
+    const { pullRequestNumber, repoPath } = pullRequestData;
+    return this.patch(`/repos/${repoPath}/pulls/${pullRequestNumber}`, JSON.stringify(patchJson));
   }
 }
