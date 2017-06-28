@@ -9,6 +9,7 @@
   "author": "Dale Bustad <dale@divmain.com>",
   "license": "MIT",
   "dependencies": {
+    "dotenv": "^4.0.0",
     "fs-router": "^0.2.0",
     "js-yaml": "^3.8.4",
     "jsonwebtoken": "^7.4.0",
