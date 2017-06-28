@@ -22,7 +22,7 @@ exports.GitHub = class GitHub {
     const installationToken = await getInstallationToken(this.installationId);
 
     const headers = {
-      "User-Agent": "divmain/semver-as-a-service",
+      "User-Agent": "divmain/maintainerd",
       "Accept": "application/vnd.github.machine-man-preview+json",
       "Authorization": `token ${installationToken}`
     };

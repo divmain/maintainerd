@@ -1,3 +1,6 @@
+const handlePullRequestAction = require("./handle-action");
+
+
 const extractPRMetadata = payload => ({
   action: payload.action,
   installationId: payload.installation.id,
@@ -14,6 +17,6 @@ const extractPRMetadata = payload => ({
 
 module.exports = async (req, res) => {
   const payload = await json(req);
-  await updateStatus(extractPRMetadata(payload));
+  await handlePullRequestAction(extractPRMetadata(payload));
   return send(res, 200);
 };
