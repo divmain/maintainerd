@@ -5,7 +5,7 @@ const { load } = require("js-yaml");
 const { getInstallationToken } = require("./installation-token");
 
 
-module.exports.GitHub = class GitHub {
+exports.GitHub = class GitHub {
   constructor (installationId) {
     this.installationId = installationId;
   }
