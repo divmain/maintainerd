@@ -9,7 +9,7 @@ const actionableEvents = {
   // opened
 };
 
-exports.updateStatus = opts => {
+exports.updateStatus = async opts => {
   // const {
   //   action,
   //   installationId,
