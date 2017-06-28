@@ -28,3 +28,12 @@ commit:
   message:
     maxLines: 20
     minLines: 1
+issue:
+  autoclose:
+    with_label:
+      - not-enough-information
+    after_day: 7
+  ungroomed:
+    # send_email: dale@divmain.com
+    webhook: http://my.web.hook/
+    after_day: 7
