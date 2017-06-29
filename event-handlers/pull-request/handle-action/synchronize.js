@@ -37,19 +37,36 @@ const checkSubjects = (commitConfig, commitEntries) => _.chain(commitEntries)
 const checkMessageWith = ({ subject = {}, message = {} }) => {
   const {
     maxLines,
-    minLines
+    minLines,
+    enforceEmptySecondLine,
+    linesMustHaveLengthBetween
   } = message;
 
   return ({ commit: { message }, sha }) => {
     const shortSha = sha.slice(0, 7);
 
-    const commitLines = message.split("\n").length;
+    const commitLines = message.split("\n");
 
-    if (maxLines && commitLines > maxLines) {
+    if (maxLines && commitLines.length > maxLines) {
       return `Commit message for ${shortSha} is too long.`
     }
-    if (minLines && commitLines < minLines) {
+    if (minLines && commitLines.length < minLines) {
       return `Commit message for ${shortSha} is too short.`
+    }
+    if (enforceEmptySecondLine && commitLines.length > 1 && commitLines[1].trim !== "") {
+      return `Commit message for ${shortSha} must have empty second line.`;
+    }
+    if (linesMustHaveLengthBetween) {
+      const [ minLineLen, maxLineLen ] = linesMustHaveLengthBetween;
+      const hasExtraLongLine = _.some(lines.slice(1), line => line.length > maxLineLen);
+      const hasTooShortLine = _.some(lines.slice(2), line => line.length < minLineLen);
+
+      if (hasExtraLongLine) {
+        return `Commit message lines much be shorter than ${maxLineLen} for ${shortSha}.`;
+      }
+      if (hasTooShortLine) {
+        return `Commit message lines much be longer than ${minLineLen} for ${shortSha}.`;
+      }
     }
   };
 };

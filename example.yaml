@@ -28,6 +28,8 @@ commit:
   message:
     maxLines: 20
     minLines: 1
+    enforceEmptySecondLine: true
+    linesMustHaveLengthBetween: [0, 72]
 issue:
   autoclose:
     with_label:
