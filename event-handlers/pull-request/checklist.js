@@ -1,4 +1,4 @@
-const { includes } = require("lodash");
+const { includes, chain } = require("lodash");
 
 
 const SEPARATOR = exports.SEPARATOR = "<!-- maintainerd: DO NOT REMOVE -->";
@@ -69,4 +69,38 @@ exports.checkSemver = body => {
   if (complete === 0 ) { return "You must select a semantic version."; }
 
   return "You may only select a single semantic version.";
+};
+
+exports.getLogEntry = (oldBody, newBody, username) => {
+  // If a checkbox was (un)checked, the length will be unchanged.
+  if (oldBody.length !== newBody.length) { return null; }
+
+  const oldLines = oldBody.split("\n");
+  const newLines = newBody.split("\n");
+
+  // If a checkbox was (un)checked, the number of lines will be unchanged.
+  if (oldLines.length !== newLines.length) { return null; }
+
+  return chain(oldLines)
+    .map((oldLine, idx) => {
+      const newLine = newLines[idx];
+      if (oldLine === newLine) { return; }
+
+      if (includes(oldLine, ENTRY_MARKER)) {
+        const [ checkboxSegment, description ] = newLine.split(ENTRY_MARKER, 2);
+        return `@${username} ${checkboxSegment === "- [ ] " ? "unchecked" : "checked"} \`${description.trim()}\`.`;
+      }
+
+      if (includes(oldLine, ENTRY_MARKER_REQUIRED)) {
+        const [ checkboxSegment, description ] = newLine.split(ENTRY_MARKER_REQUIRED, 2);
+        return `@${username} ${(checkboxSegment === "- [ ] ") ? "unchecked" : "checked"} \`${description.trim()}\`.`;
+      }
+
+      if (includes(oldLine, SEMVER_MARKER)) {
+        const [ checkboxSegment, description ] = newLine.split(SEMVER_MARKER, 2);
+        return `@${username} ${checkboxSegment === "- [ ] " ? "deselected" : "selected"} \`${description.trim()}\` as the semantic version.`;
+      }
+    })
+    .find()
+    .value();
 };

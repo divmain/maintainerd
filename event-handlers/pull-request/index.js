@@ -12,7 +12,7 @@ const extractPrData = payload => ({
   userId: payload.sender.login,
 
   body: payload.pull_request.body,
-  changes: payload.pull_request.changes,
+  changes: payload.changes,
   state: payload.pull_request.state,
   base: payload.pull_request.base
 });

@@ -17,7 +17,6 @@ const checkSubjectWith = ({ subject = {} }) => {
     if (mustHaveLengthBetween) {
       if (commitSubject.length > maxSubjectLen) { return `Subject for ${shortSha} is too long.`; }
       if (commitSubject.length < minSubjectLen) {
-        console.log("bad bad", shortSha);
         return `Subject for ${shortSha} is too short.`;
       }
     }
