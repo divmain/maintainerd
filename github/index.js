@@ -15,11 +15,11 @@ exports.GitHub = class GitHub {
   }
 
   post (urlSegment, body) {
-    return this.fetch("POST", urlSegment, body);
+    return this.fetch("POST", urlSegment, JSON.stringify(body));
   }
 
   patch (urlSegment, body) {
-    return this.fetch("PATCH", urlSegment, body);
+    return this.fetch("PATCH", urlSegment, JSON.stringify(body));
   }
 
   async fetch (method, urlSegment, body) {    
@@ -61,16 +61,16 @@ exports.GitHub = class GitHub {
       sha
     });
 
-    return this.post(`/repos/${repoPath}/statuses/${sha}?${queryString}`, JSON.stringify({
+    return this.post(`/repos/${repoPath}/statuses/${sha}?${queryString}`, {
       state,
       description: description || "",
       context
-    }));
+    });
   }
 
   updatePullRequest (pullRequestData, patchJson) {
     const { pullRequestNumber, repoPath } = pullRequestData;
-    return this.patch(`/repos/${repoPath}/pulls/${pullRequestNumber}`, JSON.stringify(patchJson));
+    return this.patch(`/repos/${repoPath}/pulls/${pullRequestNumber}`, patchJson);
   }
 
   async getPullRequestCommits (repoPath, pullRequestNumber) {
