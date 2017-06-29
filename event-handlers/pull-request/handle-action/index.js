@@ -6,12 +6,7 @@ const actionableEvents = {
 };
 
 module.exports = async (data, config, gh) => {
-  const {
-    action,
-    installationId,
-    repoPath,
-    sha
-  } = data;
+  const { action } = data;
 
   const actionHandler = actionableEvents[action];
   return actionHandler ?
