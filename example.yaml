@@ -30,14 +30,21 @@ commit:
     minLines: 1
     enforceEmptySecondLine: true
     linesMustHaveLengthBetween: [0, 72]
+issue:
+  onLabelAdded:
+    not-enough-information:
+      action: autoNotify
+      data: >
+        This issue has been tagged with the `not-enough-information` label.  In order for us to help you, please respond with the following information:
+
+        - A description of the problem, including any relevant error output that you find in the Sublime console.
+        - blah, blah, blah
+
+        If we receive no response to this issue within 2 weeks, the issue will be closed.  If that happens, feel free to re-open with the requested information.  Thank you!
+
 # # TODO: NOT YET SUPPORTED
-# issue:
 #   autoclose:
 #     with_label:
 #       - not-enough-information
-#     after_day: 7
-#   ungroomed:
-#     # send_email_to:
-#     #   - divmain
-#     webhook: http://my.web.hook/
-#     after_day: 7
+#     after_day: 14
+
