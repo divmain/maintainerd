@@ -1,8 +1,9 @@
 const { build: buildChecklist } = require("../checklist");
+const editedHandler = require("./edited");
+const synchronizeHandler = require("./synchronize");
 
 
 module.exports = async (pullRequestData, config, gh) => {
-  const { body } = pullRequestData;
-  const newBody = buildChecklist(body, config);
-  await gh.updatePullRequest(pullRequestData, { body: newBody });
+  await editedHandler(pullRequestData, config, gh);
+  await synchronizeHandler(pullRequestData, config, gh);
 };

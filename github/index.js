@@ -50,8 +50,8 @@ exports.GitHub = class GitHub {
       .then(yamlString => load(yamlString, "utf8"));
   }
 
-  updateCommit (repoPath, sha, failureMessage) {
-    const state = failureMessage ? "pending" : "success";
+  updateCommit (repoPath, sha, context, failureMessage) {
+    const state = failureMessage ? "failure" : "success";
     const description = failureMessage ? failureMessage : "maintainerd thanks you!";
 
     const [ org, repo ] = repoPath.split("/");
@@ -64,12 +64,17 @@ exports.GitHub = class GitHub {
     return this.post(`/repos/${repoPath}/statuses/${sha}?${queryString}`, JSON.stringify({
       state,
       description: description || "",
-      context: "divmain/maintainerd"
+      context
     }));
   }
 
   updatePullRequest (pullRequestData, patchJson) {
     const { pullRequestNumber, repoPath } = pullRequestData;
     return this.patch(`/repos/${repoPath}/pulls/${pullRequestNumber}`, JSON.stringify(patchJson));
+  }
+
+  async getPullRequestCommits (repoPath, pullRequestNumber) {
+    const response = await this.get(`/repos/${repoPath}/pulls/${pullRequestNumber}/commits`);
+    return response.json();
   }
 }

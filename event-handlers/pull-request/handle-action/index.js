@@ -1,6 +1,6 @@
 const actionableEvents = {
-  // edited: require("./edited"),
-  // synchronize: require("./synchronize"),
+  edited: require("./edited"),
+  synchronize: require("./synchronize"),
   reopened: require("./opened"),
   opened: require("./opened")
 };
