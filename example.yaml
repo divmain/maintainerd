@@ -20,7 +20,7 @@ pullRequest:
     autodetect: true
 commit:
   subject:
-    mustHaveLengthBetween: [8, 100]
+    mustHaveLengthBetween: [8, 72]
     mustMatch:
       - !!js/regexp /.*/
     mustNotMatch:
