@@ -7,7 +7,7 @@ const { ISS } = require("../config");
 
 const cert = readFileSync(path.resolve(__dirname, "../private.pem"));
 const iss = parseInt(ISS, 10);
-const expiration = 600; // seconds
+const expiration = 300; // seconds
 
 const now = () => (Date.now() / 1000) | 0;
 
