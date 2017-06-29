@@ -1,5 +1,6 @@
 log: true
 pullRequest:
+  # disableExplanation: false
   preamble: >
     The maintainers of this repo require that all pull request submitters agree and adhere
     to the following:
@@ -44,7 +45,7 @@ issue:
 
 # # TODO: NOT YET SUPPORTED
 #   autoclose:
-#     with_label:
+#     - withLabel:
 #       - not-enough-information
-#     after_day: 14
+#       afterDay: 14
 
