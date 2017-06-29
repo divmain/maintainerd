@@ -30,12 +30,14 @@ commit:
     minLines: 1
     enforceEmptySecondLine: true
     linesMustHaveLengthBetween: [0, 72]
-issue:
-  autoclose:
-    with_label:
-      - not-enough-information
-    after_day: 7
-  ungroomed:
-    # send_email: dale@divmain.com
-    webhook: http://my.web.hook/
-    after_day: 7
+# # TODO: NOT YET SUPPORTED
+# issue:
+#   autoclose:
+#     with_label:
+#       - not-enough-information
+#     after_day: 7
+#   ungroomed:
+#     # send_email_to:
+#     #   - divmain
+#     webhook: http://my.web.hook/
+#     after_day: 7
