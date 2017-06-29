@@ -102,11 +102,15 @@ exports.GitHub = class GitHub {
     return response.json();
   }
 
-  async createLogPost (repoPath, pullRequestNumber, sha) {
-    const response = await this.post(`/repos/${repoPath}/issues/${pullRequestNumber}/comments`, {
-      body: getNewLog(sha)
+  async postComment (repoPath, issueNumber, body) {
+    const response = await this.post(`/repos/${repoPath}/issues/${issueNumber}/comments`, {
+      body
     });
     return response.json();
+  }
+
+  async createLogPost (repoPath, pullRequestNumber, sha) {
+    return this.postComment(repoPath, pullRequestNumber, getNewLog(sha));
   }
 
   async getComments (repoPath, issueNumber) {

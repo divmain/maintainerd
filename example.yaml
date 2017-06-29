@@ -33,7 +33,7 @@ commit:
 issue:
   onLabelAdded:
     not-enough-information:
-      action: autoNotify
+      action: comment
       data: >
         This issue has been tagged with the `not-enough-information` label.  In order for us to help you, please respond with the following information:
 

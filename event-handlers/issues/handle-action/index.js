@@ -1,4 +1,6 @@
-const actionableEvents = {};
+const actionableEvents = {
+  labeled: require("./labeled")
+};
 
 module.exports = async (data, config, gh) => {
   const { action } = data;
