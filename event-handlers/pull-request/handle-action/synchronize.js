@@ -1,5 +1,4 @@
-const { flow, map, find } = require("lodash/fp");
-const _ = require("lodash");
+const { chain, some } = require("lodash");
 
 
 const checkSubjectWith = ({ subject = {} }) => {
@@ -29,7 +28,7 @@ const checkSubjectWith = ({ subject = {} }) => {
   };
 };
 
-const checkSubjects = (commitConfig, commitEntries) => _.chain(commitEntries)
+const checkSubjects = (commitConfig, commitEntries) => chain(commitEntries)
   .map(checkSubjectWith(commitConfig))
   .find()
   .value();
@@ -58,8 +57,8 @@ const checkMessageWith = ({ subject = {}, message = {} }) => {
     }
     if (linesMustHaveLengthBetween) {
       const [ minLineLen, maxLineLen ] = linesMustHaveLengthBetween;
-      const hasExtraLongLine = _.some(lines.slice(1), line => line.length > maxLineLen);
-      const hasTooShortLine = _.some(lines.slice(2), line => line.length < minLineLen);
+      const hasExtraLongLine = some(lines.slice(1), line => line.length > maxLineLen);
+      const hasTooShortLine = some(lines.slice(2), line => line.length < minLineLen);
 
       if (hasExtraLongLine) {
         return `Commit message lines much be shorter than ${maxLineLen} for ${shortSha}.`;
@@ -71,7 +70,7 @@ const checkMessageWith = ({ subject = {}, message = {} }) => {
   };
 };
 
-const checkMessages = (commitConfig, commitEntries) => _.chain(commitEntries)
+const checkMessages = (commitConfig, commitEntries) => chain(commitEntries)
   .map(checkMessageWith(commitConfig))
   .find()
   .value();
