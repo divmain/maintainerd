@@ -92,6 +92,11 @@ exports.GitHub = class GitHub {
     });
   }
 
+  async getPullRequest(repoPath, pullRequestNumber) {
+    const response = await this.get(`/repos/${repoPath}/pulls/${pullRequestNumber}`);
+    return response.json();
+  }
+
   updatePullRequest (pullRequestData, patchJson) {
     const { pullRequestNumber, repoPath } = pullRequestData;
     return this.patch(`/repos/${repoPath}/pulls/${pullRequestNumber}`, patchJson);

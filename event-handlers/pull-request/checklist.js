@@ -4,7 +4,7 @@ const { includes, chain } = require("lodash");
 const SEPARATOR = exports.SEPARATOR = "<!-- maintainerd: DO NOT REMOVE -->";
 const ENTRY_MARKER = "<!-- checklist item -->"
 const ENTRY_MARKER_REQUIRED = "<!-- checklist item; required -->";
-const SEMVER_MARKER = "<!-- semver -->";
+const SEMVER_MARKER = exports.SEMVER_MARKER = "<!-- semver -->";
 
 
 const discreteInstances = (string, substring) => string.split(substring).length - 1;
