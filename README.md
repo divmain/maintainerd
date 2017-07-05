@@ -1,12 +1,12 @@
 # maintainerd
 
-Maintaining a successful OSS project _takes time_, and will often involve a lot of repetitive chores.  But should we do busy work when we can automate all that pain away?  We're engineers, after all!
+Maintaining a successful OSS project _takes time_, and will often involve a lot of repetitive chores.  But why should we do busy work when we can automate all that pain away?  We're engineers, after all!
 
 Meet `maintainerd`: your OSS maintenance [daemon][1].  Think of it as your own personal minion, dedicated to dotting all the I's and crossing all the T's behind the scenes, leaving you with more time to do the work you'd prefer to be doing.
 
-This project was born out of my need to streamline the maintenance process for my OSS projects: primarily [freactal](https://github.com/FormidableLabs/freactal), [Rapscallion](https://github.com/FormidableLabs/rapscallion), and [GitSavvy](https://github.com/divmain/GitSavvy).  Before I published more of the projects in my queue, it seems prudent to ensure I don't get overloaded.
+This project was born out of my need to streamline the maintenance process for my OSS projects: primarily [freactal](https://github.com/FormidableLabs/freactal), [Rapscallion](https://github.com/FormidableLabs/rapscallion), and [GitSavvy](https://github.com/divmain/GitSavvy).  Before I published more of the projects in my queue, it seemed prudent to ensure I wouldn't get overloaded.
 
-One quick note: I wrote `maintainerd` to solve my problems, but I'm making it available to the rest of the developer community too.  If you want to help pay for server costs, or just want to say thanks, you can make a donation [here](https://donorbox.org/maintainerd).  Thanks in advance!
+One quick note: I wrote `maintainerd` to solve my own problems, but I'm making it available to the rest of the developer community too.  If you want to help pay for server costs, or just want to show your appreciation, you can make a donation [here](https://donorbox.org/maintainerd).  Thanks in advance!
 
 [1]: https://en.wikipedia.org/wiki/Daemon_(computing)
 
@@ -85,7 +85,7 @@ issue:
         In order for us to help you, please respond with the following
         information:
 
-        - A description of the problem, including any relevant error output that you find in the Sublime console.
+        - A description of the problem, including any relevant error output...
         - blah, blah, blah
 
         If we receive no response to this issue within 2 weeks, the issue will
@@ -115,9 +115,9 @@ The response will be a 200 with a text body containing one of:
 More selections may be added in the future.
 
 
-### NPM Packages
+### npm Packages
 
-Should you desire to do so, you can use the above API to auto-publish NPM packages at the granularity of a pull request.
+Should you desire to do so, you can use the above API to auto-publish npm packages at the granularity of a pull request.
 
 To accomplish this, add something like the following to the `deploy` stage of your CI of choice:
 
@@ -185,6 +185,7 @@ else
             ((VERSION_ARRAY[2]++))
         else
             echo "Matching semantic version not found; aborting publish."
+            exit 1
         fi
 
         git config --global user.name "My Bot User"
