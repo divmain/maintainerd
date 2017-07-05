@@ -91,7 +91,7 @@ issue:
 
 ## Semantic Versioning
 
-One of the options that `maintainerd` supplies is a [semver](http://semver.org) selection.  However, this option isn't very useful unless that information is easily accessible.  `maintainerd` provides a simple API for that purpose:
+One of the options that `maintainerd` supplies is a [semver](http://semver.org) selection.  However, this option isn't very useful unless that information is easily accessible outside of the PR.  `maintainerd` provides a simple API for that purpose:
 
 `GET https://maintainerd.divmain.com/api/semver?repoPath=XYZ&prNumber=XYZ&installationId=XYZ`
 
