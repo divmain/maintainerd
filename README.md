@@ -23,16 +23,26 @@ One quick note: I wrote `maintainerd` to solve my problems, but I'm making it av
 The `.maintainerd` file is used by the service to determine which actions to take and when.  The file is in YAML format, and supports the following settings:
 
 ```yaml
+# maintainerd can keep a log of all interactions with the Pull Request
+# integrations as a comment in your PR.
 log: true
+# This contains all pull request related config options.
 pullRequest:
+  # maintainerd will insert checkboxes and other information for the
+  # PR submitter to interact with.  The preamble is the text inserted
+  # before all of that.
   preamble: >
     The maintainers of this repo require that all pull request submitters agree and adhere
     to the following:
+  # Check boxes that will be inserted into the PR description.
   items:
     - prompt: >
         I have read the [Contributor License Agreement](http://google.com), and indicate
         my agreement by checking this box.
+      # If `default` is true, it will start in the checked state.
       default: false
+      # If `required` is true, the PR will not be allowed to be merged before
+      # the checkbox is checked.
       required: true
     - prompt: All related documentation has been updated to reflect the changes made.
       default: false
@@ -40,25 +50,36 @@ pullRequest:
     - prompt: My commit messages are cleaned up and ready to merge.
       default: false
       required: true
+  # maintainerd can ask the submitter whether the pull request represents a
+  # "major", "minor", "patch", or "documentation only" level change
   semver:
     enabled: true
-    autodetect: true
+# maintainerd can also enforce certain rules on the commits that are submitted
 commit:
   subject:
+    # Length restrictions for the first line in each commit.
     mustHaveLengthBetween: [8, 72]
+    # Regular expressions that must match the first line in each commit.
     mustMatch:
       - !!js/regexp /.*/
+    # Regular expressions that must NOT match the first line in each commit.
     mustNotMatch:
       - !!js/regexp /^fixup!/
+  # More rules for other lines in a commmit message.
   message:
     maxLines: 20
     minLines: 1
     enforceEmptySecondLine: true
     linesMustHaveLengthBetween: [0, 72]
+# maintainerd can also help you with managing issues.
 issue:
+  # When a label is added to an issue...
   onLabelAdded:
+    # And that label is equal to "not-enough-information"...
     not-enough-information:
+      # A comment will be added to the issue...
       action: comment
+      # With the following content.
       data: >
         This issue has been tagged with the `not-enough-information` label.  In order for us to help you, please respond with the following information:
 
