@@ -57,8 +57,8 @@ const checkMessageWith = ({ subject = {}, message = {} }) => {
     }
     if (linesMustHaveLengthBetween) {
       const [ minLineLen, maxLineLen ] = linesMustHaveLengthBetween;
-      const hasExtraLongLine = some(lines.slice(1), line => line.length > maxLineLen);
-      const hasTooShortLine = some(lines.slice(2), line => line.length < minLineLen);
+      const hasExtraLongLine = some(commitLines.slice(1), line => line.length > maxLineLen);
+      const hasTooShortLine = some(commitLines.slice(2), line => line.length < minLineLen);
 
       if (hasExtraLongLine) {
         return `Commit message lines much be shorter than ${maxLineLen} for ${shortSha}.`;
