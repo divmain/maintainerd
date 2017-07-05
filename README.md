@@ -80,3 +80,113 @@ issue:
         If we receive no response to this issue within 2 weeks, the issue will be closed.  If that happens, feel free to re-open with the requested information.  Thank you!
 ```
 
+## Semantic Versioning
+
+One of the options that `maintainerd` supplies is a [semver](http://semver.org) selection.  However, this option isn't very useful unless that information is easily accessible.  `maintainerd` provides a simple API for that purpose:
+
+`GET https://maintainerd.divmain.com/api/semver?repoPath=XYZ&prNumber=XYZ&installationId=XYZ`
+
+You need to provide three options:
+
+- `repoPath`: The combination of owner and repository name, e.g. `divmain/maintainerd`.
+- `prNumber`: The number of the pull request in that repository.
+- `installationId`: The ID for your GitHub installation of `maintainerd`.  This can be found by browsing [here](https://github.com/settings/installations), finding `maintainerd` in the list, and clicking the `Configure` button next to it.  The installation ID will be the last segment of the URL.
+
+The response will be a 200 with a text body containing one of:
+
+- `major`
+- `minor`
+- `patch`
+- `documentation only`
+
+More selections may be added in the future.More selections may be added in the future.
+
+
+#### NPM Packages
+
+Should you desire to do so, you can use the above API to auto-publish NPM packages at the granularity of a pull request.
+
+To accomplish this, you can add something like the following to the `deploy` stage of your CI of choice:
+
+```sh
+#!/usr/bin/env bash
+
+PULL_REQUEST_NUMBER=$(git show HEAD --format=format:%s | sed -nE 's/Merge pull request #([0-9]+).*/\1/p')
+
+if [ -z "$PULL_REQUEST_NUMBER" ]; then
+    echo "No pull request number found; aborting publish."
+else
+    echo "Detected pull request #$PULL_REQUEST_NUMBER."
+    SEMVER_CHANGE=$(curl "https://maintainerd.divmain.com/api/semver?repoPath=abc/xyz&installationId=55555&prNumber=$PULL_REQUEST_NUMBER")
+    if [ -z "$SEMVER_CHANGE" ]; then
+        echo "No semver selection found; aborting publish."
+    else
+        echo "Detected semantic version change of $SEMVER_CHANGE."
+
+        # CI might leave the working directory in an unclean state.
+        git reset --hard
+
+        eval npm version "$SEMVER_CHANGE"
+        npm publish
+
+        git config --global user.name "My Bot User"
+        git config --global user.email "my-bot@user.com"
+
+        git remote add origin-deploy https://${GH_TOKEN}@github.com/abc/xyz.git > /dev/null 2>&1
+        git push --quiet --tags origin-deploy master
+
+        echo "Done!"
+    fi
+fi
+```
+
+#### Git Tags
+
+If you use Git tags for version tracking, you can auto-increment and push those tags back to GitHub.
+
+```sh
+#!/usr/bin/env bash
+
+PULL_REQUEST_NUMBER=$(git show HEAD --format=format:%s | sed -nE 's/Merge pull request #([0-9]+).*/\1/p')
+
+if [ -z "$PULL_REQUEST_NUMBER" ]; then
+    echo "No pull request number found; aborting publish."
+else
+    echo "Detected pull request #$PULL_REQUEST_NUMBER."
+    SEMVER_CHANGE=$(curl "https://maintainerd.divmain.com/api/semver?repoPath=abc/xyz&installationId=55555&prNumber=$PULL_REQUEST_NUMBER")
+    if [ -z "$SEMVER_CHANGE" ]; then
+        echo "No semver selection found; aborting publish."
+    else
+        echo "Detected semantic version change of $SEMVER_CHANGE."
+        MOST_RECENT_TAG=$(git describe --abbrev=0)
+        VERSION_ARRAY=( ${MOST_RECENT_TAG//./ } )
+
+        if [ "$SEMVER_CHANGE" == "major" ]; then
+            ((VERSION_ARRAY[0]++))
+            VERSION_ARRAY[1]=0
+            VERSION_ARRAY[2]=0
+        elif [ "$SEMVER_CHANGE" == "minor" ]; then
+            ((VERSION_ARRAY[1]++))
+            VERSION_ARRAY[2]=0
+        elif [ "$SEMVER_CHANGE" == "patch" ]; then
+            ((VERSION_ARRAY[2]++))
+        else
+            echo "Matching semantic version not found; aborting publish."
+        fi
+
+        git config --global user.name "My Bot User"
+        git config --global user.email "my-bot@user.com"
+
+        # CI might leave the working directory in an unclean state.
+        git reset --hard
+        git tag -a "${VERSION_ARRAY[0]}.${VERSION_ARRAY[1]}.${VERSION_ARRAY[2]}" -m "v${VERSION_ARRAY[0]}.${VERSION_ARRAY[1]}.${VERSION_ARRAY[2]}"
+
+        git remote add origin-deploy https://${GH_TOKEN}@github.com/abc/xyz.git > /dev/null 2>&1
+        git push --quiet --tags origin-deploy master
+
+        echo "Done!"
+    fi
+fi
+```
+
+
