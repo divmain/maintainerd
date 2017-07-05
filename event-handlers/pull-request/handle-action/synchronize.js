@@ -7,7 +7,7 @@ const checkSubjectWith = ({ subject = {} }) => {
     mustMatch,
     mustNotMatch
   } = subject;
-  const [ maxSubjectLen, minSubjectLen ] = mustHaveLengthBetween || [];
+  const [ minSubjectLen, maxSubjectLen ] = mustHaveLengthBetween || [];
 
   return ({ commit: { message }, sha }) => {
     const shortSha = sha.slice(0, 7);
