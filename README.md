@@ -11,14 +11,6 @@ One quick note: I wrote `maintainerd` to solve my problems, but I'm making it av
 [1]: https://en.wikipedia.org/wiki/Daemon_(computing)
 
 
-## Features
-
-The list is ever growing, but here's a list of the things that `maintainerd` can do for you:
-
-- stuff
-- things
-
-
 ## How does it work?
 
 1. [Install the GitHub integration](https://github.com/apps/maintainerd).
@@ -29,10 +21,6 @@ The list is ever growing, but here's a list of the things that `maintainerd` can
 ## Configuration
 
 The `.maintainerd` file is used by the service to determine which actions to take and when.  The file is in YAML format, and supports the following settings:
-
-### `pullRequest`
-
-This is a top-level category for pull request management.
 
 ```yaml
 log: true
