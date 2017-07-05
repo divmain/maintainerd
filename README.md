@@ -80,18 +80,22 @@ issue:
       # A comment will be added to the issue...
       action: comment
       # With the following content.
-      data: >
-        This issue has been tagged with the `not-enough-information` label.  In order for us to help you, please respond with the following information:
+      data: |
+        This issue has been tagged with the `not-enough-information` label.
+        In order for us to help you, please respond with the following
+        information:
 
         - A description of the problem, including any relevant error output that you find in the Sublime console.
         - blah, blah, blah
 
-        If we receive no response to this issue within 2 weeks, the issue will be closed.  If that happens, feel free to re-open with the requested information.  Thank you!
+        If we receive no response to this issue within 2 weeks, the issue will
+        be closed.  If that happens, feel free to re-open with the requested
+        information.  Thank you!
 ```
 
 ## Semantic Versioning
 
-One of the options that `maintainerd` supplies is a [semver](http://semver.org) selection.  However, this option isn't very useful unless that information is easily accessible outside of the PR.  `maintainerd` provides a simple API for that purpose:
+One of the options that `maintainerd` can insert into each pull request is [semantic version](http://semver.org) selection.  However, this option isn't very useful unless the selection that was made is easily accessible outside of the PR (in a script, for example).  `maintainerd` provides a simple API for that purpose:
 
 `GET https://maintainerd.divmain.com/api/semver?repoPath=XYZ&prNumber=XYZ&installationId=XYZ`
 
@@ -108,14 +112,14 @@ The response will be a 200 with a text body containing one of:
 - `patch`
 - `documentation only`
 
-More selections may be added in the future.More selections may be added in the future.
+More selections may be added in the future.
 
 
-#### NPM Packages
+### NPM Packages
 
 Should you desire to do so, you can use the above API to auto-publish NPM packages at the granularity of a pull request.
 
-To accomplish this, you can add something like the following to the `deploy` stage of your CI of choice:
+To accomplish this, add something like the following to the `deploy` stage of your CI of choice:
 
 ```sh
 #!/usr/bin/env bash
@@ -149,9 +153,9 @@ else
 fi
 ```
 
-#### Git Tags
+### Git Tags
 
-If you use Git tags for version tracking, you can auto-increment and push those tags back to GitHub.
+If you use Git tags for version tracking, you can auto-increment and push those tags back to GitHub, too.
 
 ```sh
 #!/usr/bin/env bash
