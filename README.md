@@ -203,3 +203,8 @@ fi
 ```
 
 
+## License
+
+This project is published under the MIT license.
+
+If you do find it useful, please consider contributing your changes back and/or making a donation [here](https://donorbox.org/maintainerd) to cover server costs.
