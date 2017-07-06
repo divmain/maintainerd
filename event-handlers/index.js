@@ -10,5 +10,6 @@ const configMiddleware = handler => async payload => {
 
 exports.eventHandlers = {
   pull_request: configMiddleware(require("./pull-request")),
-  issues: configMiddleware(require("./issues"))
+  issues: configMiddleware(require("./issues")),
+  push: configMiddleware(require("./push"))
 };
