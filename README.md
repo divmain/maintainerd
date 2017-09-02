@@ -208,6 +208,15 @@ echo "Done!"
 ```
 
 
+## Development
+
+Once you've made the change, run lint and start the application to ensure your code is clear of errors.
+
+```bash
+npm run lint
+npm run start
+```
+
 ## License
 
 This project is published under the MIT license.
