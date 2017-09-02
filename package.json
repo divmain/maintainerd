@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint .",
+    "test": "mocha",
     "start": "micro index"
   },
   "author": "Dale Bustad <dale@divmain.com>",
@@ -21,6 +22,8 @@
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
-    "eslint": "^3.19.0"
+    "eslint": "^3.19.0",
+    "mocha": "^3.5.0",
+    "rewire": "^2.5.2"
   }
 }
