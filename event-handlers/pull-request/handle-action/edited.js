@@ -1,5 +1,3 @@
-const { includes } = require("lodash");
-
 const {
   build: buildChecklist,
   isPresent: checklistIsPresent,

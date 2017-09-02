@@ -18,9 +18,9 @@ module.exports = async (shortRef, data, config, gh) => {
     return;
   }
 
-  const prMatch = pullRequestMergeMessage.match(prcommit.message);
+  const prMatch = pullRequestMergeMessage.match(prCommit.message);
   if (!prMatch) { return; }
-  const pullRequestNum = [ , prMatch ];
+  const pullRequestNum = [ prMatch ];
 
   await gh.postComment(data.repoPath, pullRequestNum, `The changes in this PR have been released as ${shortRef}`);
 };

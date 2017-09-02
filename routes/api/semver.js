@@ -1,5 +1,4 @@
-const { send, json } = require("micro");
-const { find } = require("lodash");
+const { send } = require("micro");
 
 const { GitHub } = require("../../github");
 const { SEMVER_MARKER } = require("../../event-handlers/pull-request/checklist");
