@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint .",
     "start": "micro index"
   },
   "author": "Dale Bustad <dale@divmain.com>",
@@ -17,5 +18,9 @@
     "micro": "^7.3.2",
     "node-fetch": "^1.6.3",
     "qs": "^6.4.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "eslint": "^3.19.0"
   }
 }

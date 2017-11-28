@@ -1,4 +1,3 @@
-const { build: buildChecklist } = require("../checklist");
 const editedHandler = require("./edited");
 const synchronizeHandler = require("./synchronize");
 

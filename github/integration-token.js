@@ -1,7 +1,6 @@
 const { readFileSync } = require("fs");
 const path = require("path");
 const jwt = require("jsonwebtoken");
-const fetch = require("node-fetch");
 
 const { ISS } = require("../config");
 

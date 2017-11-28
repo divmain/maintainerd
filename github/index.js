@@ -46,7 +46,7 @@ exports.GitHub = class GitHub {
     return this.fetch("PATCH", urlSegment, JSON.stringify(body));
   }
 
-  async fetch (method, urlSegment, body) {    
+  async fetch (method, urlSegment, body) {
     const installationToken = await getInstallationToken(this.installationId);
 
     const headers = {
@@ -139,4 +139,4 @@ exports.GitHub = class GitHub {
     });
     return response.json();
   }
-}
+};

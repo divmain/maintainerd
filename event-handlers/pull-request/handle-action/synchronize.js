@@ -23,7 +23,7 @@ const checkSubjectWith = ({ subject = {} }) => {
       mustMatch && !mustMatch.test(commitSubject) ||
       mustNotMatch && mustNotMatch.test(commitSubject)
     ) {
-      return `Subject for ${shortSha} does not meet content requirements.`
+      return `Subject for ${shortSha} does not meet content requirements.`;
     }
   };
 };
@@ -33,7 +33,7 @@ const checkSubjects = (commitConfig, commitEntries) => chain(commitEntries)
   .find()
   .value();
 
-const checkMessageWith = ({ subject = {}, message = {} }) => {
+const checkMessageWith = ({ message = {} }) => {
   const {
     maxLines,
     minLines,
@@ -47,10 +47,10 @@ const checkMessageWith = ({ subject = {}, message = {} }) => {
     const commitLines = message.split("\n");
 
     if (maxLines && commitLines.length > maxLines) {
-      return `Commit message for ${shortSha} is too long.`
+      return `Commit message for ${shortSha} is too long.`;
     }
     if (minLines && commitLines.length < minLines) {
-      return `Commit message for ${shortSha} is too short.`
+      return `Commit message for ${shortSha} is too short.`;
     }
     if (enforceEmptySecondLine && commitLines.length > 1 && commitLines[1].trim !== "") {
       return `Commit message for ${shortSha} must have empty second line.`;

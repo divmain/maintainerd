@@ -5,13 +5,10 @@ const { eventHandlers } = require("../../event-handlers");
 const { TOKEN } = require("../../config");
 
 
-const last = arr => arr[arr.length - 1];
-
-
 const isValid = async (req, providedSignature) => {
   const hmac = createHmac("sha1", TOKEN);
   hmac.update(await buffer(req), "utf-8");
-  const calculatedSignature = `sha1=${hmac.digest("hex")}`
+  const calculatedSignature = `sha1=${hmac.digest("hex")}`;
   return providedSignature === calculatedSignature;
 };
 
