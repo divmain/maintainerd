@@ -52,7 +52,7 @@ const checkMessageWith = ({ message = {} }) => {
     if (minLines && commitLines.length < minLines) {
       return `Commit message for ${shortSha} is too short.`;
     }
-    if (enforceEmptySecondLine && commitLines.length > 1 && commitLines[1].trim !== "") {
+    if (enforceEmptySecondLine && commitLines.length > 1 && commitLines[1].trim() !== "") {
       return `Commit message for ${shortSha} must have empty second line.`;
     }
     if (linesMustHaveLengthBetween) {

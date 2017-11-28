@@ -18,3 +18,13 @@ describe("checkMessageWith#no-config", () => {
 		});
 	});
 });
+
+const emptySecondLineConfig = { message: { enforceEmptySecondLine: true } };
+
+describe("checkMessageWith#empty-second-line", () => {
+	it("Should allow empty 2nd line", () => {
+		Object.values(commitEntries).map((commitEntry) => {
+			assert(!checkMessageWith(emptySecondLineConfig)(commitEntry));
+		});
+	});
+});
