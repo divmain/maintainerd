@@ -27,7 +27,7 @@ module.exports = async (pullRequestData, config, gh) => {
 
   const failureMessage =
     checkEntries(body) ||
-    checkSemver(body) ||
+    checkSemver(body, config) ||
     null;
 
   await gh.updateCommit(repoPath, sha, "body", failureMessage);

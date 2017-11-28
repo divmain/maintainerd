@@ -54,6 +54,9 @@ pullRequest:
   # "major", "minor", "patch", or "documentation only" level change
   semver:
     enabled: true
+    # If `required` is true, the PR will not be allowed to be merged before
+    # at least one semver target is checked.
+    required: true
 # maintainerd can also enforce certain rules on the commits that are submitted
 commit:
   subject:
