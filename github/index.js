@@ -9,7 +9,7 @@ const { getInstallationToken } = require("./installation-token");
 const NEXT_ENTRY_MARKER = "<!-- log tail -->";
 
 const timeStamp = () => new Date().toISOString();
-const getNewLog = sha => getUpdatedLog(`[maintainerd](http://maintainerd.divmain.com/) logging is enabled for this repository.
+const getNewLog = sha => getUpdatedLog(`[maintainerd](https://github.com/divmain/maintainerd) logging is enabled for this repository.
 
 All actions related to rules and their enforcement will be logged here as a permanent record.
 
